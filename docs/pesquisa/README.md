@@ -5,7 +5,7 @@ Um arquivo por frente, numerado igual ao prompt que o gerou (`docs/prompts/`).
 | Arquivo | Sessão | Status |
 |---|---|---|
 | `01-diagnostico-territorial.md` | 01 | pendente |
-| `02-catalogo-bases.md` + `licencas.md` | 02 | pendente |
+| `02-catalogo-bases.md` + `licencas.md` | 02 | concluída (PR da sessão 02) |
 | `03-concorrencia-e-lacunas.md` | 03 | pendente |
 | `04-estado-da-arte.md` | 04 | pendente |
 | `05-credito-rural-e-outcome.md` | 05 | pendente |
