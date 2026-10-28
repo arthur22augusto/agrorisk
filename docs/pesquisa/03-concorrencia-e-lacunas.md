@@ -102,7 +102,60 @@ Leitura: os totais diferem pouco e a incerteza das notas é maior que a diferen�
 
 ## 7. Lista de 30 empresas-alvo em MG para customer discovery
 
-LISTA_ALVOS_PLACEHOLDER
+**Status do critério de pronto: 29 organizações com evidência aberta (meta: 30). Não completei a trigésima sem evidência. Dentre as 29, #28 é fraco como alvo e #29 é canal/parceira, não alvo de venda; contam 27 alvos efetivos.** Somente pessoas jurídicas; nenhum decisor nomeado. Páginas de Sicredi, BDMG, FAEMG e Emater bloquearam acesso automatizado (403/503): isso limita a verificação, não indica inexistência. Datas de imprensa de 2018–2022 podem estar defasadas. "Relatório" = política/relatório público (PRSAC/GRSAC para financeiras; sustentabilidade/manejo para as demais). Nenhuma singular mineira tem GRSAC próprio verificado.
+
+### A. Cooperativas de crédito, bancos e fomento
+
+| # | Organização | Região | Por que é alvo | Evidência | Ressalvas |
+|---|---|---|---|---|---|
+| 1 | Sicoob Central Cecremge | MG; sede histórica em BH | Central de 51 filiadas em 323 municípios: piloto alcança todas | [Cecremge](https://www.sicoob.com.br/web/sicoobcentralcecremge/sicoob-central-cecremge) | Linka relatórios de sustentabilidade; PRSAC não visto na página |
+| 2 | Sicoob Central Crediminas | MG | Filiadas em Divinópolis, Sete Lagoas e Bom Despacho | [Singulares](https://www.sicoob.com.br/web/sicoobcentralcrediminas/cooperativas-singulares) | GRSAC/PRSAC não verificados |
+| 3 | Sicoob Credisete | Sete Lagoas e região | Nasceu de 25 produtores rurais em 1986; vitrine direta | [Credisete](https://www.sicoob.com.br/web/sicoobcredisete/sicoob-credisete) | Página não detalha crédito rural |
+| 4 | Sicoob Centro-Oeste | Itaúna; agências na RMBH | Atua no cinturão da RMBH e atende siderúrgicas | [Sobre](https://www.sicoob.com.br/web/sicoobcentrooeste/sobre) | Página não menciona agro; perfil urbano/industrial é inferência |
+| 5 | Sicoob Credpit | Pitangui; área inclui Curvelo e Sete Lagoas | Cobre entorno de Sete Lagoas | [Estatuto 2023](https://www.sicoob.com.br/documents/40480156/54394662/2023-03-16-Sicoob-Credpit-Estatuto-Social.pdf) | Área pode ter mudado |
+| 6 | Sicoob Arcomcredi | Arcos | Polo calcário do Centro-Oeste | [Estatuto 2026](https://www.sicoob.com.br/documents/d/sicoobarcomcredi/03-estatuto-social-aprovado-em-19-02-2026-age-2026-assinado-1) | Ligação com carste é inferência |
+| 7 | Sicoob Credibom | Bom Despacho, Nova Serrana, BH | Eixo Centro-Oeste e BH | [Crediminas](https://www.sicoob.com.br/web/sicoobcentralcrediminas/cooperativas-singulares) | Só listagem de agências |
+| 8 | Sicoob Crediverde | Divinópolis e região | Cobre Divinópolis (usina da SDS) | idem | Só listagem de agências |
+| 9 | Sicoob Credipatos | Patos de Minas | Polo de leite; segunda região de validação | idem | Só listagem de agências |
+| 10 | Sistema Sicredi em MG | MG: 241 agências, ~400 mil associados (dez/2024) | Expansão em MG, perfil agro | [Coop. de Crédito 2025](https://cooperativismodecredito.coop.br/2025/03/sicredi-planeja-inaugurar-50-agencias-em-minas-gerais-neste-ano/) | GRSAC 2022–2025 existem, PDF deu 403; nenhuma singular verificada |
+| 11 | BDMG | BH | R$ 3 bi anunciados para safra 2026/27; agricultura familiar via cooperativas | [Itatiaia](https://www.itatiaia.com.br/agro/bdmg-anuncia-r-3-bilhoes-para-a-safra-2026-2027-e-apoia-agricultura-familiar/) | Site oficial 403; GRSAC/PRSAC não localizados |
+| 12 | Banco do Nordeste (MG) | Norte de MG, Jequitinhonha, Mucuri | R$ 503,5 mi em crédito rural jan–ago/2025; aceita SeloVerde | [Diário do Comércio](https://diariodocomercio.com.br/financas/contratacoes-bnb-minas-gerais-superam-r-3-bilhoes/) | Fora da vitrine; GRSAC não verificado |
+| 13 | Invest Minas | BH | Estudo de Fiagro estadual de R$ 150 mi para pequenos produtores | [AgFeed 28/05/2025](https://agfeed.com.br/economia/exclusivo-governo-de-minas-gerais-planeja-lancar-fiagro-de-r-150-milhoes) | Projeto embrionário; status atual não confirmado |
+
+### B. Cooperativas agropecuárias, laticínios e hortifrúti
+
+| # | Organização | Região | Por que é alvo | Evidência | Ressalvas |
+|---|---|---|---|---|---|
+| 14 | Itambé | BH; fábricas em Pará de Minas, Sete Lagoas, Guanhães, Uberlândia | Base de produtores de leite que tomam crédito rural | [Itambé](https://www.itambe.com.br) | **Titularidade conflitante** (site diz cooperativa; notícia de 2019 fala em compra pela Lactalis) — confirmar antes de abordar |
+| 15 | CCPR | MG e GO | 30 cooperativas, 25 mil cooperados, 23 lojas agro | [CCPR](https://www.ccpr.coop.br) | Sede não informada |
+| 16 | Coopatos | Patos de Minas (inferência) | Leite, lojas agro, nutrição animal | [Coopatos](https://www.coopatos.com.br) | Cidade não confirmada na página |
+| 17 | CeasaMinas | Contagem (BR-040) | Escoa o cinturão verde da RMBH | [CeasaMinas](https://www.ceasaminas.com.br) | Menu "Produtor Rural" sem conteúdo lido |
+
+### C. Florestal, siderurgia e carvão
+
+| # | Organização | Região | Por que é alvo | Evidência | Ressalvas |
+|---|---|---|---|---|---|
+| 18 | Vallourec Florestal | Curvelo; 19 fazendas, ~165 mil ha | Carvão para alto-forno; exposição a desmatamento e terceiros (inferência) | [Plano de Manejo jul/2026](https://www.vallourec.com/app/uploads/sites/5/2026/07/Resumo-Publico-do-Plano-de-Manejo-2026-1.pdf) | Relatório público aberto |
+| 19 | SDS Siderúrgica (S&D) | Sete Lagoas, Divinópolis | >50 mil ha de eucalipto próprio; gusa de baixo carbono | [Diário do Comércio 03/07/2025](https://diariodocomercio.com.br/economia/sds-siderurgica-expansao-minas-gerais/) | Relatório não verificado |
+| 20 | Aperam BioEnergia | Jequitinhonha | 126 mil ha; carvão renovável | [Diário do Comércio 2022](https://diariodocomercio.com.br/economia/producao-de-carvao-vegetal-da-aperam-e-modernizada/) | Dados de 2022; fora da RMBH |
+| 21 | Gerdau (MG) | Ouro Branco, Divinópolis, Sete Lagoas etc. | 220 mil ha de eucalipto, 90 mil ha de mata nativa | [Diário do Comércio 2022](https://diariodocomercio.com.br/economia/gerdau-investe-r-2-bi-em-minas-gerais-neste-ano/) | Dados de 2022 |
+| 22 | Amif | BH | Reúne florestais; porta de entrada | [Diário do Comércio 2022](https://diariodocomercio.com.br/agronegocio/amif-empossa-nova-gestao-do-conselho-deliberativo/) | Associação (canal) |
+| 23 | Sindifer-MG | MG; Sete Lagoas tem 21 das 48 usinas | Canal para guseiras | [Jornal de Brasília 25/06/2026](https://jornaldebrasilia.com.br/noticias/economia/mais-de-50-de-usinas-de-ferro-gusa-podem-parar-se-novo-tarifaco-entrar-em-vigor-diz-sindifer/) | Sindicato (canal) |
+
+### D. Mineração, imobiliário, seguro e entidades
+
+| # | Organização | Região | Por que é alvo | Evidência | Ressalvas |
+|---|---|---|---|---|---|
+| 24 | Vale | Quadrilátero Ferrífero | Meta de 500 mil ha recuperados/protegidos até 2030 | [Vale](https://vale.com/pt/sustainability) | Relatório de sustentabilidade aberto |
+| 25 | MRV | sede não confirmada | Urbanismo/loteamentos (franja) | [MRV](https://www.mrv.com.br) | Sede em BH é suposição |
+| 26 | Direcional Engenharia | 8 estados + DF; Contagem | Presença na RMBH | [Direcional](https://www.direcional.com.br) | Sede não confirmada |
+| 27 | Grupo Cottage | Pedro Leopoldo | Loteamento na franja do carste | [Diário do Comércio 2020](https://diariodocomercio.com.br/negocios/valorizacao-do-vetor-norte-impulsiona-loteamentos-na-regiao/) | Matéria de 6 anos |
+| 28 | Rota Seguros | BH + interior | Distribuição regional de seguros | [Apólice 2022](https://revistaapolice.com.br/2022/06/rota-seguros-completa-21-anos-e-comemora-expansao/) | **Fraco:** sem menção a seguro rural; é corretora |
+| 29 | Sistema Ocemg | BH | Diretório do cooperativismo mineiro | [Ocemg](https://sistemaocemg.coop.br/) | **Canal/parceira, não alvo de venda** |
+
+**Não entraram (evidência insuficiente):** Cresol em MG (página aberta cita 20 estados sem MG), Sicoob Metropolitano, Sicoob Credifor, CSN Mineração, Mineração Usiminas, Coopersete (Sete Lagoas; 2012–13, pode não existir mais), FAEMG, Emater-MG (parceiros), Ibram, "Barbosa" (laticínio, sem entidade confirmável).
+**Lacunas:** nenhuma cooperativa de hortifrúti do cinturão verde, FIDC/Fiagro agro com gestora em BH ou seguradora rural sediada em MG achadas.
+**Ordem sugerida de entrevistas:** (1) Sicoob Credisete, Credpit, Centro-Oeste e Cecremge; (2) Sicredi e BDMG; (3) Vallourec Florestal, SDS e Sindifer.
 
 ## 8. Riscos e contra-evidências
 
