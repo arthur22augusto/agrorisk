@@ -8,7 +8,7 @@ Um arquivo por frente, numerado igual ao prompt que o gerou (`docs/prompts/`).
 | `02-catalogo-bases.md` + `licencas.md` | 02 | concluída (PR da sessão 02) |
 | `03-concorrencia-e-lacunas.md` | 03 | concluída (29 alvos de 30; ver seção 7) |
 | `04-estado-da-arte.md` | 04 | concluída |
-| `05-credito-rural-e-outcome.md` | 05 | pendente |
+| `05-credito-rural-e-outcome.md` | 05 | rascunho (parte regulatória com fontes secundárias) |
 | `06-debate-escopo.md` | 06 | pendente |
 
 ## Padrão de cada documento
