@@ -4,8 +4,8 @@ Um arquivo por frente, numerado igual ao prompt que o gerou (`docs/prompts/`).
 
 | Arquivo | Sessão | Status |
 |---|---|---|
-| `01-diagnostico-territorial.md` | 01 | pendente |
-| `02-catalogo-bases.md` + `licencas.md` | 02 | concluída (PR da sessão 02) |
+| `01-diagnostico-territorial.md` | 01 | concluída (lacunas listadas nas seções 10–11) |
+| `02-catalogo-bases.md` + `licencas.md` | 02 | concluída |
 | `03-concorrencia-e-lacunas.md` | 03 | concluída (29 alvos de 30; ver seção 7) |
 | `04-estado-da-arte.md` | 04 | concluída |
 | `05-credito-rural-e-outcome.md` | 05 | rascunho (parte regulatória com fontes secundárias) |
