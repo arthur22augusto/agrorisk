@@ -116,7 +116,34 @@ LISTA_ALVOS_PLACEHOLDER
 
 ## 9. Revisões críticas
 
-REVISOES_PLACEHOLDER
+Opiniões das personas, sem pesquisa web adicional; os fatos vêm deste documento.
+
+### 9.1 Comprador cético (gerente de risco de cooperativa/banco em MG)
+
+- **Veredito: piloto grátis; não compraria hoje.** Falta evidência de que o score prevê perda de crédito e de que dá ação melhor que o que já tem.
+- **Não compra consulta de CAR** (já tem Serasa/Agrotools ou equivalente; SeloVerde MG e Agro Brasil+Sustentável são gratuitos).
+- **Compraria** uma camada de priorização sobre a própria carteira: ranking com backtest (top 10% concentra eventos futuros), explicação por fator e lista de visitas dentro do orçamento. Modelo de cobrança preferido: piloto de 6 meses numa carteira fechada, depois assinatura anual por carteira, não por consulta. Faixa de preço: **chute da persona, sem fonte** (dezenas de milhares de R$/ano para cooperativa média); não usar como premissa.
+- **Quem decide:** ele recomenda; aprova o comitê de crédito/risco, com TI (integração, LGPD) e jurídico (responsabilidade por erro). Na filiada, a compra pode estar na central/confederação.
+- **Não respondido pela proposta:** elo com perda econômica (L7); Y indefinido (desmatamento é raro na RMBH e retrospectivo); gatilho regulatório fraco para ≤4 MF; disposição a pagar; custo de falso positivo e explicação ao produtor; licença e defasagem dos dados; fornecedor pequeno (LGPD, SLA, API, responsabilidade); viés do CAR declaratório.
+- **Nichos:** pagaria (com condição) crédito PME em MG, risco hídrico e mineração/barragens (disposição a pagar NV); **não pagaria** franja urbana (dados pagos, MVP longo), leite (Lactalis tem técnicos próprios; dor é da indústria), eucalipto/carvão (talhão privado; comprador é a siderurgia) nem consulta pura.
+- **O que levaria ao "sim":** backtest em carteira real com lift/recall no top 5–10% ligado a perdas; metodologia explicável ao produtor; piloto sem custo com contrato de dados/LGPD/limite de responsabilidade; integração simples (arquivo/API) sem trocar fornecedor; custo de análise menor em horas de analista.
+- **Métricas para o comitê:** eventos antecipados no top-k vs. regra atual; falsos positivos entre bons produtores; horas de analista; operações bloqueadas a tempo; perda evitada em R$.
+
+### 9.2 Advogado do diabo
+
+- **Objeção central:** o documento deriva "oportunidade" de "não achei". L1, L2, L3, L5 e L6 repousam em [NV] ou busca rasa; "ninguém faz" não separa "ninguém pediu" de "não funciona".
+- **Por lacuna:** L1 é lacuna de marketing, não de produto (comprador raramente exige AUC); L2 é ausência de achado (quem usa IDE-Sisema internamente não divulga) e dado estadual aberto já é commodity (SeloVerde, CAR 2.0); L3 pode ser ausência de demanda (sem gatilho CMN, ninguém paga); L4 é a mais sólida, mas é lacuna de produtividade, não de risco socioambiental; L5 aponta ausência de demanda (cooperativa pode ser inalcançável; último segmento obrigado); L6 depende de custo de visita e efeito causal, ambos não medidos; **L7 é a hipótese mais ameaçadora**, não uma lacuna.
+- **Viés de busca:** fontes são imprensa e sites comerciais, o que favorece quem faz marketing e esconde sistemas internos; GRSAC Sicredi com 403, Cresol/BDMG não lidos, editais/vagas rasos; preços NV; extrator automático resumiu as páginas.
+- **Ranking de nichos (seção 5):** notas são julgamento com pesos iguais e diferença menor que a incerteza; "pouca concorrência = nota alta" premia nicho sem mercado (F); disposição a pagar NV entra na soma (falsa precisão); o nicho A (≈ R$ 0,7 mi/ano) é pequeno demais para uma empresa e mesmo assim lidera; falta peso para tamanho endereçável.
+- **Cenário de fracasso mais provável:** eventos raros em MG, poucos positivos e IC largos; lift trivial sobre "quem já teve evento"; autuação mede onde o Estado fiscaliza, não o comportamento; cooperativa usa SeloVerde/CAR 2.0 gratuitos e não vê urgência até 2027–2028; sem elo com inadimplência, "boa técnica, ninguém paga"; Serasa/Agrotools podem adicionar camada preditiva; fundador com ~5 h/semana.
+- **Três evidências que mudariam a opinião:** (1) cooperativa/banco de MG declara em entrevista ou carta de intenção que pagaria por priorização de carteira, dizendo valor e quem decide; (2) taxa de eventos suficiente para backtest (ex.: ≥200 positivos em recorte maior; o número é ordem de grandeza da persona, não regra) e modelo que bata baseline de histórico/vizinhança com validação em blocos espaciais; (3) associação entre evento socioambiental e inadimplência/perda em carteira piloto.
+
+### 9.3 Decisões incorporadas neste documento
+
+- "Ausência de concorrente" **não** é argumento de tese; lacunas L1–L3, L5, L6 ficam como hipóteses a testar.
+- L7 (elo evento → perda econômica) passa a ser a **primeira hipótese a testar** (sessão 05 e entrevistas).
+- O ranking da seção 5 **não deve ser usado para decidir nicho**; refazer com tamanho de mercado e disposição a pagar medidos.
+- Prioridade antes de construir: customer discovery com a lista da seção 7 e medição da taxa de eventos em MG (sessões 01/06).
 
 ## 10. Perguntas em aberto
 
