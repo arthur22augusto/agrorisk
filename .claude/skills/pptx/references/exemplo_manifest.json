@@ -1,0 +1,73 @@
+{
+  "projeto": "EXEMPLO ILUSTRATIVO - estudo comparativo",
+  "objetivo": "Avaliar se uma intervenção está associada a uma mudança em um indicador",
+  "publico": "Pesquisadores e decisores",
+  "tese": "A confirmar quando resultados reais forem validados",
+  "resultados": [
+    {
+      "id": "R01",
+      "titulo": "Universo, cobertura e elegibilidade",
+      "pergunta": "Quantas unidades integram a análise e qual é a cobertura?",
+      "claim": "A amostra deve ser contextualizada antes de estimar diferenças",
+      "prioridade": "P0",
+      "status": "ausente",
+      "tipo": "descritivo",
+      "metrica": "Contagem de unidades e percentual elegível",
+      "unidade": "unidades; %",
+      "comparadores": [],
+      "periodo": "A definir",
+      "populacao": "A definir",
+      "denominador": "Universo elegível (a definir)",
+      "dimensoes": ["grupo", "ano"],
+      "colunas_esperadas": ["grupo", "ano", "n_unidades", "n_elegiveis", "taxa_cobertura"],
+      "calculo": "Contagens únicas e taxa com denominador explícito",
+      "metodo": "Descritivo",
+      "fonte": "A identificar",
+      "arquivo_origem": "",
+      "aba_origem": "",
+      "slide": "Slide 2",
+      "risco_se_faltar": "O público desconhece o universo dos resultados",
+      "proxima_acao": "Consolidar tabela de universo",
+      "dependencias": [],
+      "observacoes": "Não criar percentuais sem denominador"
+    },
+    {
+      "id": "R02",
+      "titulo": "Evolução antes e depois por grupo",
+      "pergunta": "A variação observada difere entre intervenção e comparação?",
+      "claim": "A trajetória deve considerar referência temporal e comparação",
+      "prioridade": "P0",
+      "status": "ausente",
+      "tipo": "comparacao",
+      "metrica": "Taxa média do indicador",
+      "unidade": "%",
+      "comparadores": ["Intervenção", "Comparação"],
+      "periodo": "Pré e pós (definir cortes)",
+      "populacao": "Unidades com observações válidas",
+      "denominador": "Unidades observadas em cada grupo-período",
+      "dimensoes": ["grupo", "periodo"],
+      "colunas_esperadas": ["grupo", "periodo", "n_unidades", "taxa_media", "intervalo_inferior", "intervalo_superior"],
+      "calculo": "Taxa do indicador por grupo/período; incerteza conforme desenho",
+      "metodo": "Descritivo comparativo (não implica causalidade)",
+      "fonte": "A identificar",
+      "arquivo_origem": "",
+      "aba_origem": "",
+      "slide": "Slide 3",
+      "risco_se_faltar": "Não é possível comunicar uma diferença comparativa defensável",
+      "proxima_acao": "Montar tabela grupo x período",
+      "dependencias": ["R01"],
+      "observacoes": "Exemplo de especificação sem resultados reais"
+    }
+  ],
+  "perguntas": [
+    {
+      "id": "Q01",
+      "prioridade": "P0",
+      "pergunta": "A finalidade é descrever uma mudança ou avaliar efeito da intervenção?",
+      "porque_importa": "As alegações de causalidade exigem desenho adequado",
+      "impacto_no_ppt": "Tese, primeiro slide e visual principal",
+      "status": "aberta",
+      "resposta": ""
+    }
+  ]
+}
