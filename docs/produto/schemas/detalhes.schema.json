@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/arthur22augusto/agrorisk/docs/produto/schemas/detalhes.schema.json",
+  "title": "Detalhes do resultado do motor (v0, provisório)",
+  "description": "Lista dos fatores que explicam o resultado de uma unidade, ordenada por |contribuicao| decrescente.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["fator", "valor", "unidade", "contribuicao", "direcao", "fonte", "data_referencia", "data_publicacao", "texto"],
+    "properties": {
+      "fator": {"type": "string", "minLength": 1, "description": "Identificador estável do fator (snake_case)."},
+      "valor": {"type": ["number", "string", "null"], "description": "Valor observado do indicador, na unidade informada."},
+      "unidade": {"type": "string", "description": "Unidade do valor (ha, km, %, mm, …)."},
+      "contribuicao": {"type": "number", "description": "Contribuição ao log-odds de p (positivo aumenta o risco)."},
+      "direcao": {"enum": ["aumenta_risco", "reduz_risco", "neutro"]},
+      "fonte": {"type": "string", "minLength": 1},
+      "data_referencia": {"type": "string", "format": "date", "description": "Data a que o dado se refere."},
+      "data_publicacao": {"type": "string", "format": "date", "description": "Data em que o dado ficou disponível; nunca posterior à data de corte."},
+      "texto": {"type": "string", "minLength": 1, "description": "Frase em português para a tela."}
+    }
+  }
+}
