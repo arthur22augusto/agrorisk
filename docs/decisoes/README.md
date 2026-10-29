@@ -20,4 +20,4 @@ Modelo:
 | Nº | Decisão | Status |
 |---|---|---|
 | 0001 | [Recorte, cliente-alvo e premissas iniciais](0001-recorte-cliente-e-premissas.md) | aceita |
-| — | `escopo-mvp.md` (Y, recorte final, métricas, critério de sucesso) | pendente — sessão 06 |
+| — | [`escopo-mvp.md`](escopo-mvp.md) (frente, Y, recorte, métricas, critério de sucesso) | aceita (Y provisório até o gate da sessão 07) |

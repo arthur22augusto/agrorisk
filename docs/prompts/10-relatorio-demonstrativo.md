@@ -10,6 +10,8 @@ Leia `CLAUDE.md`, `docs/decisoes/escopo-mvp.md`, `docs/modelo/model-card.md` e, 
 
 **Agentes:** `comprador-cetico` (revisa o material como cliente), a skill `pptx` + `FN_revisao` (se quiser um deck curto) e `advogado-do-diabo` (afirmações excessivas).
 
+**Formato mínimo exigido pela persona do comprador (decisão 06):** um PDF de **2 páginas** para uma cooperativa fictícia/carteira anonimizada com (i) os 20 CARs de maior risco, com mapa e motivo legível; (ii) backtest 2021–24 contra baselines e contra a regra determinística, com IC e taxa de falsos positivos no top 10%; (iii) tabela "o que é determinístico (vedação) × o que é predição (p)"; (iv) parágrafo de LGPD/responsabilidade (pseudonimização, sem CPF, cooperativa controladora); (v) proposta de piloto de 90 dias, gratuito, até ~500 CARs (valor sugerido, não verificado), snapshot congelado com hash e avaliação prospectiva. O restante abaixo complementa esse núcleo.
+
 **Entregáveis em `reports/demo-carteira/`**
 1. **Excel** (`carteira_exemplo.xlsx`): aba de resumo, ranking (CAR, município, probabilidade, faixa de risco, top-3 razões, ação recomendada), metodologia em linguagem simples, métricas do backtest e fontes/licenças.
 2. **Relatório** (`relatorio.html` ou PDF) com 4–6 páginas: problema, como funciona, resultado do backtest ("se você tivesse usado em 2022…"), carteira exemplo, limitações e próximos passos/piloto.
@@ -18,6 +20,6 @@ Leia `CLAUDE.md`, `docs/decisoes/escopo-mvp.md`, `docs/modelo/model-card.md` e, 
 
 **Regras:** CARs são públicos, mas não exponha nome/CPF de proprietários; use só o código do CAR. Todas as bases citadas com licença e atribuição.
 
-**Critério de pronto:** o material se explica sozinho para um gerente de risco em 5 minutos; o `comprador-cetico` dá veredito "piloto" ou melhor, ou suas objeções ficam listadas.
+**Critério de pronto:** o material se explica sozinho para um gerente de risco em 5 minutos; o `comprador-cetico` (persona de central de cooperativas) dá veredito "piloto" ou melhor, ou suas objeções ficam listadas.
 
 Ao terminar: commit (sem dados brutos; HTML/XLSX leves podem entrar), push e PR "Sessão 10 — relatório demonstrativo".

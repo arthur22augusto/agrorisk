@@ -9,7 +9,7 @@ Um arquivo por frente, numerado igual ao prompt que o gerou (`docs/prompts/`).
 | `03-concorrencia-e-lacunas.md` | 03 | concluída (29 alvos de 30; ver seção 7) |
 | `04-estado-da-arte.md` | 04 | concluída |
 | `05-credito-rural-e-outcome.md` | 05 | rascunho (parte regulatória com fontes secundárias) |
-| `06-debate-escopo.md` | 06 | pendente |
+| `06-debate-escopo.md` | 06 | concluída (decisão em `docs/decisoes/escopo-mvp.md`) |
 
 ## Padrão de cada documento
 1. Resumo executivo (5–10 linhas, com números).
