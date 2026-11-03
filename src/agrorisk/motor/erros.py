@@ -1,4 +1,4 @@
-"""Exceções tipadas do motor e seus códigos de saída (ver docs/produto/contrato-motor-v0.md)."""
+"""Exceções tipadas do motor e seus códigos de saída (ver docs/produto/contrato-motor-v1.md)."""
 
 
 class MotorErro(Exception):

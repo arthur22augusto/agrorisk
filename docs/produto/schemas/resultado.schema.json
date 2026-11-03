@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/arthur22augusto/agrorisk/docs/produto/schemas/resultado.schema.json",
+  "title": "Resultado do motor por unidade e data de corte (v1, provisório)",
+  "description": "Uma linha de motor_resultados. Chave: (unidade_id, data_corte, y_definicao, versao_modelo). Contrato: docs/produto/contrato-motor-v1.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "unidade_id",
+    "tipo_unidade",
+    "car_codigo",
+    "data_corte",
+    "y_definicao",
+    "horizonte_meses",
+    "versao_modelo",
+    "p",
+    "score",
+    "faixa",
+    "taxa_base",
+    "nivel_espacial",
+    "aviso",
+    "porte_modulos_fiscais",
+    "porte_classe",
+    "verificacoes_avaliadas",
+    "bloqueio_provavel",
+    "n_vedacoes",
+    "n_vedacoes_indeterminadas",
+    "n_operacoes",
+    "saldo_exposto",
+    "exposicao_bloqueavel",
+    "hash_snapshot",
+    "versoes_dados",
+    "calculado_em"
+  ],
+  "properties": {
+    "unidade_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tipo_unidade": {
+      "enum": [
+        "car",
+        "gleba"
+      ]
+    },
+    "car_codigo": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}-\\d{7}-[0-9A-Fa-f]{32}$"
+    },
+    "data_corte": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-07-31$"
+    },
+    "y_definicao": {
+      "enum": [
+        "Y_total"
+      ],
+      "description": "O motor prevê Y_total; Y_ilegal e Y_agro são derivados reportados."
+    },
+    "horizonte_meses": {
+      "const": 12
+    },
+    "versao_modelo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "p": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "P(Y_total em 12 meses após data_corte), no nivel_espacial informado."
+    },
+    "score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "faixa": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "description": "Por p / taxa_base (taxa-base do nivel_espacial)."
+    },
+    "taxa_base": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "exclusiveMaximum": 1
+    },
+    "nivel_espacial": {
+      "enum": [
+        "poligono",
+        "imovel_inteiro"
+      ]
+    },
+    "aviso": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Obrigatório quando nivel_espacial = imovel_inteiro ('evento no imóvel')."
+    },
+    "porte_modulos_fiscais": {
+      "type": "number",
+      "minimum": 0
+    },
+    "porte_classe": {
+      "enum": [
+        "ate_4_mf",
+        "4_a_15_mf",
+        "acima_15_mf"
+      ]
+    },
+    "verificacoes_avaliadas": {
+      "type": "boolean",
+      "description": "false = a tabela de verificações não foi entregue; os campos de vedação ficam nulos (não confundir com 'sem vedação')."
+    },
+    "bloqueio_provavel": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Mecânica determinística (não é probabilidade estimada); ver contrato §3.3."
+    },
+    "n_vedacoes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "n_vedacoes_indeterminadas": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "n_operacoes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Operações vigentes na data de corte."
+    },
+    "saldo_exposto": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "R$; saldo (ou valor_rs como proxy) das operações vigentes."
+    },
+    "exposicao_bloqueavel": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "saldo_exposto × bloqueio_provavel (R$). Não é perda esperada."
+    },
+    "hash_snapshot": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "versoes_dados": {
+      "type": "string",
+      "description": "JSON texto {fonte: {data_referencia, data_publicacao, hashes?}}."
+    },
+    "calculado_em": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Informativo; fora da chave."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "nivel_espacial": {
+            "const": "imovel_inteiro"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "aviso": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verificacoes_avaliadas": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "bloqueio_provavel": {
+            "type": "number"
+          },
+          "n_vedacoes": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  ]
+}

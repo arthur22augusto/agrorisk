@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/arthur22augusto/agrorisk/docs/produto/schemas/detalhes.schema.json",
-  "title": "Detalhes do resultado do motor (v0, provisório)",
-  "description": "Lista dos fatores que explicam o resultado de uma unidade, ordenada por |contribuicao| decrescente.",
+  "title": "Detalhes do resultado do motor (v1, provisório)",
+  "description": "Fatores de RISCO que explicam p para uma unidade, ordenados por |contribuicao| decrescente. Vedações/verificações determinísticas NÃO entram aqui (ver verificacoes.schema.json). Contrato: docs/produto/contrato-motor-v1.md.",
   "type": "array",
   "items": {
     "type": "object",
     "additionalProperties": false,
-    "required": ["fator", "valor", "unidade", "contribuicao", "direcao", "fonte", "data_referencia", "data_publicacao", "texto"],
+    "required": ["fator", "valor", "unidade", "contribuicao", "direcao", "fonte", "data_referencia", "data_publicacao", "status_juridico", "texto"],
     "properties": {
       "fator": {"type": "string", "minLength": 1, "description": "Identificador estável do fator (snake_case)."},
       "valor": {"type": ["number", "string", "null"], "description": "Valor observado do indicador, na unidade informada."},
@@ -17,6 +17,10 @@
       "fonte": {"type": "string", "minLength": 1},
       "data_referencia": {"type": "string", "format": "date", "description": "Data a que o dado se refere."},
       "data_publicacao": {"type": "string", "format": "date", "description": "Data em que o dado ficou disponível; nunca posterior à data de corte."},
+      "status_juridico": {
+        "enum": ["detectado", "autorizado", "sem_autorizacao_identificada", "indeterminado", null],
+        "description": "Preenchido só quando o fator descreve uma supressão (detectado/autorizado/sem_autorizacao_identificada/indeterminado); nulo nos demais fatores. 'sem_autorizacao_identificada' NÃO equivale a 'ilegal'."
+      },
       "texto": {"type": "string", "minLength": 1, "description": "Frase em português para a tela."}
     }
   }

@@ -1,6 +1,6 @@
 """Catálogo de fatores do stub: coluna de entrada, transformação, padronização, coeficiente e proveniência.
 
-⚠️ Depende da sessão 06: o conjunto de fatores e os coeficientes mudam com o Y e a unidade finais.
+⚠️ Conjunto de fatores provisório: muda após o gate do Y (sessão 07). Vedação (embargo, UC, supressão × autorização) NÃO é fator.
 Os coeficientes do stub NÃO são estimados: são arbitrários, com os sinais esperados.
 """
 from __future__ import annotations
