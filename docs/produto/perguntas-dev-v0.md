@@ -1,6 +1,7 @@
 # Perguntas do dev à estatística — respostas provisórias (v0)
 
 - Data: 2026-10-29 · Status: perguntas 1–5 **provisórias** (a sessão 06b as confirma no contrato); perguntas **6–9 decididas na sessão 06** (`docs/decisoes/escopo-mvp.md`, aceita em 2026-10-29).
+- **Contrato atualizado:** perguntas 1–9 refletidas em [`contrato-motor-v1.md`](contrato-motor-v1.md) (sessão 06c); dúvidas novas estão na seção "Perguntas em aberto" de lá.
 - Origem: especificação do produto feita pelo dev (Django + PostgreSQL). **A especificação ainda não está no repositório**; quando chegar, deve ir para `docs/produto/`. Termos como Y1/Y2/Y3, gleba, faixas A–E, `exposicao_esperada` e `fonte_dados` vêm dela.
 - Legenda: **[pesquisa]** = levantado nas sessões 01–05 · **[proposta]** = sugestão a confirmar.
 

@@ -1,4 +1,6 @@
-# Contrato do motor v0 (provisório)
+# Contrato do motor v0 (provisório) — **SUBSTITUÍDO pelo [v1](contrato-motor-v1.md)**
+
+> ⚠️ **Substituído em 2026-11-03 (sessão 06c).** Mantido só como histórico: o código em `src/` e os schemas seguem o [v1](contrato-motor-v1.md). Não implementar a partir deste arquivo.
 
 - Data: 2026-10-29 · Status: **provisório** · Sessão 06b. Itens marcados ⚠️ **dependem da sessão 06** (Y e unidade finais) e podem mudar.
 - O contrato é genérico: vale para operação de crédito (frente A) e fornecedor (frente B). Em vez de nomes presos a crédito, usa `unidade_id` + `tipo_unidade`, e o Y é identificado por `evento` + `horizonte_meses`.

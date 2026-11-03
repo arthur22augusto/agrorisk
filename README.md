@@ -33,7 +33,7 @@ reports/          entregáveis (Excel, relatórios, mapas, figuras leves)
 src/agrorisk/     código Python do pipeline, modelos e relatórios
 ```
 
-## Como instalar o motor (v0, stub)
+## Como instalar o motor (v1, stub)
 ```bash
 uv add git+https://github.com/arthur22augusto/agrorisk          # núcleo leve (pandas, numpy, pyarrow, sqlalchemy)
 uv add "agrorisk[modelo] @ git+https://github.com/arthur22augusto/agrorisk"   # + lightgbm (motor real, futuro)
@@ -42,7 +42,7 @@ uv add "agrorisk[modelo] @ git+https://github.com/arthur22augusto/agrorisk"   # 
 python -m agrorisk.motor --entrada tests/fixtures/sinteticos --saida /tmp/saida   # dados sintéticos
 AGRORISK_DB_URL=postgresql+psycopg://… python -m agrorisk.motor --entrada db --saida db
 ```
-Contrato, colunas, códigos de saída e o que ainda pode mudar: [`docs/produto/contrato-motor-v0.md`](docs/produto/contrato-motor-v0.md).
+Contrato, colunas, códigos de saída e o que ainda pode mudar: [`docs/produto/contrato-motor-v1.md`](docs/produto/contrato-motor-v1.md) (v0 substituído, só histórico).
 Dados sintéticos (fictícios): `python -m agrorisk.sinteticos <pasta>` · testes: `pip install -e ".[dev]" && pytest`.
 
 ## Stack
