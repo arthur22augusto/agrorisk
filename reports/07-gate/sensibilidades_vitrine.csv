@@ -1,17 +1,17 @@
 subconjunto,n,metrica,pct,ic95_inf,ic95_sup
-todos_positivos,1039,Yagro_<=4MF (sem filtro de autorizacao),47.7,39.8,55.6
-todos_positivos,1039,Yagro_sem_aut_<=4MF (aut. só 2023-24),47.7,39.8,55.6
-todos_positivos,1039,historico_explica,49.2,42.1,56.2
-todos_positivos,1039,prev_imovel_3a,34.5,28.5,40.0
-elegiveis,568,Yagro_<=4MF (sem filtro de autorizacao),48.6,39.9,57.2
-elegiveis,568,Yagro_sem_aut_<=4MF (aut. só 2023-24),48.6,39.9,57.2
-elegiveis,568,historico_explica,46.7,39.2,53.8
-elegiveis,568,prev_imovel_3a,32.4,25.8,38.5
+todos_positivos,1044,Yagro_<=4MF (sem filtro de autorizacao),47.7,39.9,55.6
+todos_positivos,1044,Yagro_sem_aut_<=4MF (aut. só 2023-24),47.7,39.9,55.6
+todos_positivos,1044,historico_explica,49.2,42.2,56.3
+todos_positivos,1044,prev_imovel_3a,34.6,28.6,40.2
+elegiveis,572,Yagro_<=4MF (sem filtro de autorizacao),48.6,39.9,57.2
+elegiveis,572,Yagro_sem_aut_<=4MF (aut. só 2023-24),48.6,39.9,57.2
+elegiveis,572,historico_explica,46.7,39.2,53.9
+elegiveis,572,prev_imovel_3a,32.5,26.0,38.6
 elegiveis_geom_estavel_(atualizacao<=t0),62,Yagro_<=4MF (sem filtro de autorizacao),25.8,15.3,39.1
 elegiveis_geom_estavel_(atualizacao<=t0),62,Yagro_sem_aut_<=4MF (aut. só 2023-24),25.8,15.3,39.1
 elegiveis_geom_estavel_(atualizacao<=t0),62,historico_explica,56.5,41.1,68.4
 elegiveis_geom_estavel_(atualizacao<=t0),62,prev_imovel_3a,46.8,30.8,60.0
-elegiveis_sem_historico,303,Yagro_<=4MF (sem filtro de autorizacao),60.4,51.4,68.5
-elegiveis_sem_historico,303,Yagro_sem_aut_<=4MF (aut. só 2023-24),60.4,51.4,68.5
-elegiveis_sem_historico,303,historico_explica,0.0,0.0,0.0
-elegiveis_sem_historico,303,prev_imovel_3a,0.0,0.0,0.0
+elegiveis_sem_historico,305,Yagro_<=4MF (sem filtro de autorizacao),60.7,51.7,68.6
+elegiveis_sem_historico,305,Yagro_sem_aut_<=4MF (aut. só 2023-24),60.7,51.7,68.6
+elegiveis_sem_historico,305,historico_explica,0.0,0.0,0.0
+elegiveis_sem_historico,305,prev_imovel_3a,0.0,0.0,0.0

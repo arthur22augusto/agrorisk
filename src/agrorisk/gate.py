@@ -46,9 +46,16 @@ def carrega_prodes(pasta: Path) -> gpd.GeoDataFrame:
         g = g.explode(index_parts=False)
         g = g[g.geom_type == "Polygon"]
         if cer is None:
-            cer = g.geometry.union_all()
+            cer = g.geometry.reset_index(drop=True)  # polígonos do Cerrado (sem união global: inviável no treino)
         else:
-            g["geometry"] = g.geometry.difference(cer)
+            # remove da Mata Atlântica a parte sobreposta ao Cerrado, só nos polígonos que de fato se sobrepõem (índice espacial)
+            g = g.reset_index(drop=True)
+            cand = cer.sindex.query(g.geometry.values, predicate="intersects")
+            novo = g.geometry.copy()
+            for i in np.unique(cand[0]):
+                viz = cer.iloc[cand[1][cand[0] == i]].union_all()
+                novo.iloc[i] = g.geometry.iloc[i].difference(viz)
+            g["geometry"] = novo
             g = g[~g.geometry.is_empty].explode(index_parts=False)
             g = g[g.geom_type == "Polygon"]
         g["bioma"] = "Cerrado" if cer is not None and lay.endswith("cerrado-nb") else "Mata Atlantica"
