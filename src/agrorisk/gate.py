@@ -20,7 +20,8 @@ import pandas as pd
 
 UTM = 31983
 ANOS = [2021, 2022, 2023, 2024]
-FASES_MINERACAO = ("LAVRA", "LICENCIAMENTO", "REGISTRO DE EXTRAÇÃO", "DISPONIBILIDADE")  # sem pesquisa (sensibilidade à parte)
+MIN_FRAC_AUT = 0.10  # autorização só conta se cobrir ≥10% da área do evento (revisão estatística)
+FASES_MINERACAO = ("LAVRA", "LICENCIAMENTO", "REGISTRO DE EXTRAÇÃO")  # sem pesquisa (sensibilidade à parte)
 
 
 def carrega_car(pasta: Path) -> gpd.GeoDataFrame:
@@ -30,7 +31,7 @@ def carrega_car(pasta: Path) -> gpd.GeoDataFrame:
     g["criacao"] = pd.to_datetime(g.dat_criacao, utc=True).dt.tz_localize(None)
     g["atualizacao"] = pd.to_datetime(g.data_atualizacao, utc=True).dt.tz_localize(None)
     g["porte"] = pd.cut(g.m_fiscal, [-1, 4, 15, 1e9], labels=["<=4MF", "4-15MF", ">15MF"])
-    return g.drop_duplicates("cod_imovel").reset_index(drop=True)[
+    return g.sort_values("atualizacao").drop_duplicates("cod_imovel", keep="last").reset_index(drop=True)[
         ["cod_imovel", "cod_municipio_ibge", "status_imovel", "criacao", "atualizacao", "area", "m_fiscal", "porte", "geometry"]]
 
 
@@ -91,6 +92,8 @@ def autorizacao(ev: gpd.GeoDataFrame, ief: gpd.GeoDataFrame, feam: gpd.GeoDataFr
     out = pd.DataFrame(index=ev.index, data={"aut_ief_janela": False, "aut_ief_qualquer_data": False, "aut_feam_sem_data": False})
     ief = ief.copy(); ief["dpub"] = pd.to_datetime(ief.data_publi, dayfirst=True, errors="coerce")
     j = gpd.sjoin(ev[["geometry"]], ief[["dpub", "geometry"]], predicate="intersects", how="inner")
+    area_ev = ev.geometry.area
+    j = j[[a.area / area_ev[i] >= MIN_FRAC_AUT for i, a in zip(j.index, j.geometry.values.intersection(ev.geometry.loc[j.index].values))]] if len(j) else j
     for idx, d in j.groupby(level=0):
         out.loc[idx, "aut_ief_qualquer_data"] = True
         y = int(ev.loc[idx, "year"])
@@ -98,8 +101,41 @@ def autorizacao(ev: gpd.GeoDataFrame, ief: gpd.GeoDataFrame, feam: gpd.GeoDataFr
         if d.dpub.between(ini, fim).any():
             out.loc[idx, "aut_ief_janela"] = True
     jf = gpd.sjoin(ev[["geometry"]], feam[["geometry"]], predicate="intersects", how="inner")
+    if len(jf):
+        jf = jf[[a.area / area_ev[i] >= MIN_FRAC_AUT for i, a in zip(jf.index, jf.geometry.values.intersection(ev.geometry.loc[jf.index].values))]]
     out.loc[jf.index.unique(), "aut_feam_sem_data"] = True
     return out
+
+
+def _ic_boot(d: pd.DataFrame, f, B: int = 2000, seed: int = 7) -> tuple[float, float, float]:
+    """Proporção f(d) com IC95% bootstrap em blocos = município (cod_municipio_ibge)."""
+    if len(d) == 0: return (np.nan,) * 3
+    rng = np.random.default_rng(seed)
+    g = {k: f(v) for k, v in d.groupby("cod_municipio_ibge")}  # vetores booleanos por município
+    ks = list(g)
+    est = []
+    for _ in range(B):
+        sel = rng.choice(len(ks), len(ks))
+        v = np.concatenate([g[ks[i]] for i in sel]); est.append(v.mean())
+    return round(100 * f(d).mean(), 1), round(100 * np.percentile(est, 2.5), 1), round(100 * np.percentile(est, 97.5), 1)
+
+
+def sensibilidades(pos_t: pd.DataFrame) -> pd.DataFrame:
+    """Métricas do gate sob recortes alternativos, com IC (bootstrap por município). Sem autorização como filtro (IEF só cobre 2021+)
+    e com autorização apenas em 2023–24. Subconjunto `atualizacao <= t0` = geometria do CAR plausivelmente a de t0."""
+    base = {"todos_positivos": pos_t, "elegiveis": pos_t[pos_t.elegivel],
+            "elegiveis_geom_estavel_(atualizacao<=t0)": pos_t[pos_t.elegivel & ~pos_t.geom_alterada_pos_t0],
+            "elegiveis_sem_historico": pos_t[pos_t.elegivel & ~pos_t.historico_explica]}
+    defs = {"Yagro_<=4MF (sem filtro de autorizacao)": lambda d: (~d.nao_agro & (d.porte == "<=4MF")).to_numpy(),
+            "Yagro_sem_aut_<=4MF (aut. só 2023-24)": lambda d: (~d.nao_agro & (d.porte == "<=4MF") & ~(d.autorizado & d.year.isin([2023, 2024]))).to_numpy(),
+            "historico_explica": lambda d: d.historico_explica.to_numpy(),
+            "prev_imovel_3a": lambda d: d.prev_imovel_3a.to_numpy()}
+    linhas = []
+    for sub, d in base.items():
+        for nome, f in defs.items():
+            m, lo, hi = _ic_boot(d, f)
+            linhas.append(dict(subconjunto=sub, n=len(d), metrica=nome, pct=m, ic95_inf=lo, ic95_sup=hi))
+    return pd.DataFrame(linhas)
 
 
 def regra_historico(car: gpd.GeoDataFrame, prodes: gpd.GeoDataFrame, pos: pd.DataFrame) -> pd.DataFrame:
@@ -178,7 +214,7 @@ def rodar(recorte: str, data: str, saida: Path = Path("reports/07-gate")) -> dic
         if sel.empty: continue
         pol = prodes[prodes.year == y - 1]
         c = car.set_index("cod_imovel").loc[sel.cod_imovel]
-        bg = gpd.GeoDataFrame(geometry=c.geometry.buffer(1000).values, index=sel.index, crs=UTM)
+        bg = gpd.GeoDataFrame(geometry=[g.buffer(1000).difference(g) for g in c.geometry.values], index=sel.index, crs=UTM)  # anel de 1 km, sem o próprio imóvel
         hit = gpd.sjoin(bg, pol[["geometry"]], predicate="intersects", how="inner").index.unique()
         viz.append(pd.Series(sel.index.isin(hit), index=sel.index))
     pos["prev_viz_1km_12m"] = pd.concat(viz) if viz else False
@@ -200,6 +236,8 @@ def rodar(recorte: str, data: str, saida: Path = Path("reports/07-gate")) -> dic
                            pct_Yagro_sem_aut_ate4MF_elegiveis_sem_hist=fr(~el.nao_agro & ~el.autorizado & (el.porte == "<=4MF") & ~el.historico_explica, el)))
     tab = pd.DataFrame(linhas)
     tab.to_csv(saida / f"gate_{recorte}.csv", index=False)
+    sens = sensibilidades(pos_t)
+    sens.to_csv(saida / f"sensibilidades_{recorte}.csv", index=False); print(sens.to_string())
     por_porte = pos_t.groupby(["year", "porte"], observed=True).size().unstack(fill_value=0)
     por_porte.to_csv(saida / f"positivos_por_porte_{recorte}.csv")
     cols = [c for c in pos.columns if c != "geometry"]
