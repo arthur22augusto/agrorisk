@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/arthur22augusto/agrorisk/docs/produto/schemas/verificacoes.schema.json",
+  "title": "Verificações determinísticas (vedação) de uma unidade (v1, provisório)",
+  "description": "Camada determinística, separada do risco: cada item é uma verificação com fonte, data de publicação, data de corte e hash do snapshot da fonte (trilha de auditoria). Não é feature de p. Contrato: docs/produto/contrato-motor-v1.md.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["unidade_id", "data_corte", "regra", "efeito", "status_juridico", "fonte", "data_referencia", "data_publicacao", "hash_fonte", "texto"],
+    "properties": {
+      "unidade_id": {"type": "string", "minLength": 1},
+      "data_corte": {"type": "string", "format": "date", "pattern": "^\\d{4}-07-31$", "description": "Sempre 31/jul."},
+      "regra": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "Identificador estável da regra (ex.: supressao_x_autorizacao, embargo, sobreposicao_uc)."},
+      "efeito": {"enum": ["bloqueia", "alerta"], "description": "Consequência definida pelo pipeline/regulação, não pelo motor. Só 'bloqueia' entra em bloqueio_provavel."},
+      "status_juridico": {"enum": ["detectado", "autorizado", "sem_autorizacao_identificada", "indeterminado"]},
+      "fonte": {"type": "string", "minLength": 1},
+      "data_referencia": {"type": "string", "format": "date"},
+      "data_publicacao": {"type": "string", "format": "date", "description": "≤ data_corte; senão o motor falha com ErroVazamentoTemporal."},
+      "hash_fonte": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "SHA-256 do snapshot da fonte usado na verificação."},
+      "texto": {"type": "string", "minLength": 1}
+    }
+  }
+}

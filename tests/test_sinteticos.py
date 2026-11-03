@@ -23,9 +23,12 @@ def test_formato_car_e_sem_dados_pessoais():
 
 def test_cobertura_do_painel_e_taxa_base():
     d = sinteticos.gerar()
-    assert {"gleba", "fornecedor"} <= set(d["unidades"]["tipo_unidade"])
-    assert {"gleba", "imovel_inteiro"} <= set(d["unidades"]["nivel_espacial"])
-    assert abs(d["eventos"]["p_verdade"].mean() - 0.02) < 0.002
+    assert set(d["unidades"]["tipo_unidade"]) == {"car", "gleba"}  # frente B (fornecedor) não tem dado
+    assert set(d["unidades"]["nivel_espacial"]) == {"poligono", "imovel_inteiro"}
+    assert set(d["eventos"]["data_corte"]) == set(sinteticos.DATAS_CORTE)
+    assert all(c.endswith("-07-31") for c in sinteticos.DATAS_CORTE)
+    for nivel, taxa in sinteticos.TAXAS_BASE.items():
+        assert abs(d["eventos"].query("nivel_espacial == @nivel")["p_verdade"].mean() - taxa) < 0.002
 
 
 def test_imoveis_dentro_dos_municipios():
@@ -51,10 +54,22 @@ def _logit_fit(X, y, it=30):
 
 
 def test_modelo_conhecido_e_recuperavel():
-    d = sinteticos.gerar(n_imoveis=3000, n_fornecedores=300)
+    d = sinteticos.gerar(n_imoveis=3000)
     df = d["indicadores"].merge(d["eventos"], on=["unidade_id", "data_corte"])
     X = np.column_stack([ft.padronizar(f, df[f.coluna].to_numpy()) for f in ft.FATORES])
     b = _logit_fit(X, df["y"].to_numpy(float))[1:]
     verdade = np.array([sinteticos.COEF_VERDADE[f.nome] for f in ft.FATORES])
     assert (np.sign(b) == np.sign(verdade)).all()
     assert abs(b[0] - verdade[0]) < 0.25  # fator mais forte, bem estimado
+
+
+def test_camadas_v1_presentes():
+    d = sinteticos.gerar()
+    u, o, v = d["unidades"], d["operacoes"], d["verificacoes"]
+    assert {"porte_modulos_fiscais", "car_codigo", "nivel_espacial"} <= set(u.columns) and u["porte_modulos_fiscais"].ge(0).all()
+    assert {"programa", "data_contrato", "data_vencimento", "proagro_acionado"} <= set(o.columns)
+    assert set(v["status_juridico"]) == {"detectado", "autorizado", "sem_autorizacao_identificada", "indeterminado"}
+    assert (pd.to_datetime(v["data_publicacao"]) <= pd.to_datetime(v["data_corte"])).all()
+    assert v["hash_fonte"].str.fullmatch(r"[0-9a-f]{64}").all()
+    r = d["rotulos_piloto"]
+    assert (pd.to_datetime(r["data_registro"]) >= pd.to_datetime(r["data_corte"])).all()

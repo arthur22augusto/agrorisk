@@ -5,7 +5,7 @@ import subprocess
 from importlib import metadata
 from pathlib import Path
 
-VERSAO_STUB = "0.1.0-stub"
+VERSAO_STUB = "0.2.0-stub"
 
 
 def hash_git() -> str:
