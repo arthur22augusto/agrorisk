@@ -21,6 +21,7 @@ Recomendação: **seguir para o painel, mas sem congelar o protocolo de forma de
 ## Resultados por item
 
 ### (a) Porte (módulos fiscais)
+Atenção à leitura: os **positivos** são em maioria ≤ 4 MF porque há muitos CARs pequenos; a **taxa de evento por CAR** é muito maior nos grandes (painel 2021–24, elegíveis: ≤ 4 MF 0,34%; 4–15 MF 2,04%; > 15 MF 4,39% — `notebooks/07-eda-painel.ipynb`). O recall do preditivo em ≤ 4 MF parte de uma taxa-base ~0,3%.
 Positivos ≤ 4 MF: **52,0%** (por ano 48,8 / 56,4 / 47,8 / 49,5); 4–15 MF: ~28%; > 15 MF: ~20% (`positivos_por_porte_vitrine.csv`). Entre os elegíveis a fração ≤ 4 MF é 53%; entre os inelegíveis, 50%. Atenção: `m_fiscal` é o valor atual do SICAR.
 
 ### (b) Destino: mineração e urbano
@@ -29,7 +30,7 @@ Positivos ≤ 4 MF: **52,0%** (por ano 48,8 / 56,4 / 47,8 / 49,5); 4–15 MF: ~2
 - **Y_agro = 87,1%** dos positivos. Limitações: SIGMINE (só processos ativos hoje) e IBGE 2022 são fotos atuais/recentes, o que subestima o não-agro de 2021; **MapBiomas (matriz de transição) não foi obtido**: `storage.googleapis.com/mapbiomas-public` retorna 403 pelo proxy da nuvem (ver "Bloqueios").
 
 ### (c) Autorização IEF/FEAM (janela ±12 meses do ciclo; interseção ≥ 10% do evento)
-**1,5%** dos positivos têm autorização identificada (IEF datado 1,2%; FEAM sem data 0,3%). Esse número **não é informativo**: a camada IEF na vitrine tem só 314 feições, 2021–2026, então para os ciclos 2021–22 a janela é truncada e o 0,0% é artefato; a FEAM não tem data. Consequência: `Y_ilegal` ("sem autorização identificada") ≈ `Y_total` neste dado, e **o filtro de autorização não deve entrar no critério de parada** (a regra de ≥ 30% foi avaliada sem ele). Autorização só vale como filtro de 2023–24 em diante, e mesmo assim a cobertura é desconhecida (pedido de dados ao Sisema/IEF: `docs/pedidos/`).
+**1,0%** dos positivos têm autorização identificada (IEF datado 0,8%; FEAM sem data ~0,2%). Esse número **não é informativo**: a camada IEF na vitrine tem só 314 feições, 2021–2026, então para os ciclos 2021–22 a janela é truncada e o 0,0% em 2021–22 é artefato; a FEAM não tem data. Consequência: `Y_ilegal` ("sem autorização identificada") ≈ `Y_total` neste dado, e **o filtro de autorização não deve entrar no critério de parada** (a regra de ≥ 30% foi avaliada sem ele). Autorização só vale como filtro de 2023–24 em diante, e mesmo assim a cobertura é desconhecida (pedido de dados ao Sisema/IEF: `docs/pedidos/`).
 
 ### (d) Estabilidade da geometria do CAR
 - **93,4% dos positivos têm `data_atualizacao` do CAR posterior a t₀** (por ano 92–94%). O polígono atual pode ter sido retificado depois do desmatamento, o que torna a elegibilidade e o "contido no polígono" otimistas ou enviesados em direção desconhecida.

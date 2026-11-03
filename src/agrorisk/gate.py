@@ -42,7 +42,7 @@ def carrega_prodes(pasta: Path) -> gpd.GeoDataFrame:
     for lay in ["prodes-cerrado-nb", "prodes-mata-atlantica-nb"]:
         g = gpd.read_file(pasta / f"{lay}.geojson").set_crs(4326, allow_override=True).to_crs(UTM)
         g = g[g.main_class.str.upper() == "DESMATAMENTO"][["year", "geometry"]].copy()
-        g["geometry"] = g.geometry.make_valid()
+        g["geometry"] = g.geometry.make_valid(method="structure", keep_collapsed=False)  # "linework" falha com dimensões mistas no treino
         g = g.explode(index_parts=False)
         g = g[g.geom_type == "Polygon"]
         if cer is None:
@@ -87,13 +87,22 @@ def fracao_sobreposta(ev: gpd.GeoDataFrame, camada: gpd.GeoDataFrame) -> pd.Seri
     return (inter.area / ev.geometry.area).fillna(0)
 
 
+def _filtra_fracao(j: gpd.GeoDataFrame, camada: gpd.GeoDataFrame, ev: gpd.GeoDataFrame, area_ev: pd.Series) -> gpd.GeoDataFrame:
+    """Mantém pares (evento, feição) cuja interseção cobre >= MIN_FRAC_AUT da área do evento (usa a geometria da camada: índice `index_right`)."""
+    if len(j) == 0:
+        return j
+    inter = ev.geometry.loc[j.index].values.intersection(camada.geometry.loc[j.index_right].values)
+    frac = pd.Series(inter.area, index=j.index).to_numpy() / area_ev.loc[j.index].to_numpy()
+    return j[frac >= MIN_FRAC_AUT]
+
+
 def autorizacao(ev: gpd.GeoDataFrame, ief: gpd.GeoDataFrame, feam: gpd.GeoDataFrame) -> pd.DataFrame:
     """Sobreposição com IEF (datado, janela ±12 meses do ciclo) e FEAM (sem data na camada)."""
     out = pd.DataFrame(index=ev.index, data={"aut_ief_janela": False, "aut_ief_qualquer_data": False, "aut_feam_sem_data": False})
     ief = ief.copy(); ief["dpub"] = pd.to_datetime(ief.data_publi, dayfirst=True, errors="coerce")
     j = gpd.sjoin(ev[["geometry"]], ief[["dpub", "geometry"]], predicate="intersects", how="inner")
     area_ev = ev.geometry.area
-    j = j[[a.area / area_ev[i] >= MIN_FRAC_AUT for i, a in zip(j.index, j.geometry.values.intersection(ev.geometry.loc[j.index].values))]] if len(j) else j
+    j = _filtra_fracao(j, ief, ev, area_ev)
     for idx, d in j.groupby(level=0):
         out.loc[idx, "aut_ief_qualquer_data"] = True
         y = int(ev.loc[idx, "year"])
@@ -101,8 +110,7 @@ def autorizacao(ev: gpd.GeoDataFrame, ief: gpd.GeoDataFrame, feam: gpd.GeoDataFr
         if d.dpub.between(ini, fim).any():
             out.loc[idx, "aut_ief_janela"] = True
     jf = gpd.sjoin(ev[["geometry"]], feam[["geometry"]], predicate="intersects", how="inner")
-    if len(jf):
-        jf = jf[[a.area / area_ev[i] >= MIN_FRAC_AUT for i, a in zip(jf.index, jf.geometry.values.intersection(ev.geometry.loc[jf.index].values))]]
+    jf = _filtra_fracao(jf, feam, ev, area_ev)
     out.loc[jf.index.unique(), "aut_feam_sem_data"] = True
     return out
 
