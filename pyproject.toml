@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agrorisk"
+version = "0.1.0"
+description = "AgroRisk: inteligência de risco socioambiental para o mercado rural (motor estatístico)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+# Núcleo leve: o que o dev instala para chamar o motor (stub ou real).
+dependencies = [
+    "pandas>=2.1",
+    "numpy>=1.26",
+    "pyarrow>=14",
+    "sqlalchemy>=2.0",
+]
+
+[project.optional-dependencies]
+modelo = ["lightgbm>=4.3"]
+pipeline = ["geopandas>=0.14", "shapely>=2.0", "duckdb>=1.0", "rasterio>=1.3"]
+dev = ["pytest>=8", "jsonschema>=4.20", "psycopg[binary]>=3.1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agrorisk"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/agrorisk", "docs/produto/schemas", "README.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+filterwarnings = ["ignore:The default date adapter:DeprecationWarning"]
