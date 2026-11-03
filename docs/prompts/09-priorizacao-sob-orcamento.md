@@ -13,7 +13,7 @@ Leia `CLAUDE.md`, `docs/decisoes/escopo-mvp.md` e `docs/modelo/model-card.md`. E
 **Especificação**
 - Valor esperado por imóvel: `p_i × severidade_i × efetividade_ação − custo_auditoria_i`. Defina a severidade com proxies (área em risco, valor do crédito, se houver, e penalidade regulatória) e documente as premissas.
 - Otimização: knapsack/ILP (PuLP ou OR-Tools) com restrições (orçamento, capacidade por região/analista, cobertura mínima por município).
-- Comparar no backtest: top-k por probabilidade × top-k por valor esperado × regra simples (ex.: "auditar quem tem embargo") × aleatório. Curva "eventos capturados × orçamento" e "valor capturado × orçamento".
+- Comparar no backtest: top-k por probabilidade × top-k por valor esperado × **regra determinística do MCR (supressão PRODES × autorização, embargo Ibama, UC)** × regra simples (ex.: "auditar quem tem embargo") × aleatório. O ganho da prescrição deve ser medido *além* do filtro determinístico. Curva "eventos capturados × orçamento" e "valor capturado × orçamento".
 - Sensibilidade às premissas de custo e severidade.
 
 **Entregáveis:** `src/agrorisk/prescricao/`, `notebooks/09-prescricao.ipynb`, `reports/prescricao/` (figuras e tabela) e `docs/decisoes/NNNN-funcao-de-valor.md`, com as premissas.

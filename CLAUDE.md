@@ -26,20 +26,28 @@ geoprocessamento, redes e otimização sobre bases públicas (e, depois, dados p
   Pressões: expansão urbana e loteamentos, mineração (Quadrilátero Ferrífero) e barragens,
   eucalipto, pecuária, cinturão verde (hortaliças), carste de Lagoa Santa/Sete Lagoas
   (cavernas, recarga), escassez hídrica e conflitos de outorga.
-- **Cliente-alvo provisório:** (a) crédito rural para pequenos e médios produtores
-  (cooperativas de crédito, bancos). A pesquisa pode mudar isso.
-- **Evento Y:** ainda **não** definido. A sessão 06 decide, com o critério de *maior valor
-  agregado para o comprador*. Candidatos: supressão de vegetação nativa, fogo, autuação ou
-  embargo (federal ou estadual), sobreposição com áreas protegidas, conflito hídrico,
-  ou um Y composto.
+- **Frente e cliente (decisão `docs/decisoes/escopo-mvp.md`, aceita em 2026-10-29):** frente **A-reformulada** —
+  crédito rural pós-concessão, vendido a **centrais de cooperativas de crédito de MG** (discovery: Sicoob Cecremge,
+  Crediminas, Sicoob Central MG; SeloVerde MG/Semad como interlocutor). O produto tem duas camadas: **vedação/verificação
+  determinística** (supressão × autorização, embargo, UC, com trilha de auditoria) e **risco preditivo** para priorizar,
+  provado *contra* a regra determinística. **Frente B** (carvão/siderurgia, Sete Lagoas) é **só discovery** (3 entrevistas, sem código).
+  Hídrico e mineração entram como fatores/contexto, nunca como Y. Nenhum comprador pagante verificado: o piloto é grátis.
+- **Y (provisório até o gate da sessão 07):** supressão de vegetação nativa ≥ 1 ha contíguo no polígono do CAR, rótulo PRODES,
+  ciclo ago–jul, h = 12 meses, t₀ = 31/jul (`Y_total` previsto; `Y_ilegal` = sem autorização identificada e `Y_agro` = fora de
+  mineração/urbano como derivados). PRODES e MapBiomas **não** se unem. Y econômico (Y3 = atraso > 90 dias/renegociação) só no
+  piloto com dado do cliente; Proagro (Y2) fora do MVP.
+- **Unidade:** CAR × t₀ (inscrito há ≥ 6 meses, ≥ 1 ha de nativa); unidade comercial = operação + CAR.
+- **Treino:** vitrine + mesorregião Metropolitana de BH + Central Mineira.
 
 ## 3. Hipótese de MVP (hipótese, não verdade)
 
-Priorização de carteira: dada uma lista de CARs, estimar P(evento relevante em 12–24 meses)
-usando **somente informação disponível antes da data de corte**, ranquear, explicar os fatores e
-provar por **backtest temporal** que o ranking teria antecipado os eventos
-(precision@k, lift, recall nos top 5–10%, calibração). Depois, prescrever onde agir sob orçamento.
-Toda sessão deve tratar isso com ceticismo e registrar evidências contra ou a favor.
+Priorização de carteira pós-concessão: dada uma lista de CARs, aplicar a verificação determinística e estimar
+P(supressão em 12 meses) usando **somente informação disponível antes da data de corte**, ranquear, explicar os fatores e provar por
+**backtest temporal** que o ranking antecipa eventos **além da regra determinística e das baselines**.
+**Critério de sucesso (primário único, pré-registrado):** Δrecall@10% ≥ +5 pp contra a baseline composta, IC95% inferior > 0, em CARs
+sem evento prévio, pooled 2021–24 (bootstrap em blocos espaciais). Se não passar, a conclusão honesta é "o filtro determinístico basta".
+O retrospectivo com o CAR público é **exploratório** (sem versões antigas); o teste limpo é prospectivo, com snapshots próprios com hash.
+Depois, prescrever onde agir sob orçamento. Toda sessão deve tratar isso com ceticismo e registrar evidências contra ou a favor.
 
 ## 4. Regras inegociáveis
 
