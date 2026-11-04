@@ -1,0 +1,9 @@
+ano_prodes,grupo,n_cars,n_positivos,taxa_base_pct,recall_at_5pct,recall_at_10pct
+2021,todos_elegiveis,21672,103,0.48,39.8,47.6
+2021,sem_evento_previo_no_imovel,20524,62,0.3,12.9,14.5
+2022,todos_elegiveis,23856,243,1.02,26.3,35.8
+2022,sem_evento_previo_no_imovel,22645,179,0.79,12.8,22.3
+2023,todos_elegiveis,26106,93,0.36,31.2,39.8
+2023,sem_evento_previo_no_imovel,24661,63,0.26,12.7,23.8
+2024,todos_elegiveis,29309,133,0.45,40.6,43.6
+2024,sem_evento_previo_no_imovel,28169,82,0.29,8.5,19.5
